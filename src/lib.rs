@@ -1,5 +1,5 @@
-//type Hash = Vec<u32>;
-//type Address = String;
+type Hash = Vec<u8>; //needed for the Blockstruct
+type Address = String;
 //type BlockHash = Vec<u32>;
 
 // Credit: https://stackoverflow.com/a/44378174/2773837
@@ -80,10 +80,11 @@ pub fn difficulty_bytes_as_u128 (v: &Vec<u8>) -> u128 {
     ((v[16] as u128) << 0x0 * 8)
 }
 
-/*mod block;
+//this must be present in the lib to allow access from other modules to this module
+mod block; 
 pub use crate::block::Block;
 
-mod hashable;
+/*mod hashable;
 pub use crate::hashable::Hashable;
 
 mod blockchain;
