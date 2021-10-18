@@ -38,3 +38,16 @@ impl Block { //implement functions corresponds to block struct
         }
     }
 }
+
+impl Hashable for Block { //implement hashing function for a block that hashes the bytes(data) together
+    fn bytes(&self) -> Vec<u8> {
+        let mut bytes = vec![]; //declares a mutable bytes that is a vector array
+        bytes.extend(&u32_bytes(&self.index)); //inputs index data into the byte at the end of the vector using the .extend method
+        bytes.extend(&u128_bytes(&self.timestamp));
+        bytes.extend(&self.prev_block_hash); //adds the previous blockhash to the bytes to form a blockchain link
+        bytes.extend(&u64_bytes(&self.nonce));
+        bytes.extend(self.payload.as_bytes()); //gets the data the from the payload and turns it into bytes. no ampersand because as_bytes already returns a reference
+        bytes
+
+    }
+}
